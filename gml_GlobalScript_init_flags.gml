@@ -1,6 +1,6 @@
 function init_flags()
 {
-    global.FLAGS = 386;
+    global.FLAGS = 400;
     
     for (var i = 1; i <= global.FLAGS; i++)
         global.FLAG[i] = 0;
@@ -9,6 +9,8 @@ function init_flags()
     global.FLAG[142] = 1;
     global.FLAG[143] = -1;
     global.FLAG[351] = 1;
+    global.FLAG[387] = 1;
+    global.FLAG[388] = 1;
     global.TEMP_FLAGS = 197;
     
     for (var i = 1; i <= global.TEMP_FLAGS; i++)

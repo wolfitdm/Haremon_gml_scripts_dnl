@@ -3,11 +3,18 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
     var inBattle = object_index == obj_battlegirl;
     var inScene = object_index == obj_vncontroller;
     var cl = arg5;
+    var always_lewd = false;
     
     if (sfw_battle() >= 0.75 || (0 && global.settingSafeMode && arg2 != global.speciesRobot))
         cl = global.clothesMax;
     else if (sfw_battle == 0.5 || 0)
         cl = max(2, cl);
+    
+    if (global.FLAG[387] == 1)
+        cl = 0;
+    
+    if (global.FLAG[388] == 1)
+        always_lewd = true;
     
     var mySpecies = arg2;
     var xx = arg0;
@@ -339,7 +346,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), 0, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(species_lewdsprite(mySpecies), global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -386,7 +393,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), 0, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if ((species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl)) && !bottomless)
+            if (always_lewd || ((species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl)) && !bottomless))
                 draw_sprite_ext(spr_catgirl_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -462,7 +469,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
                     draw_sprite_ext(spr_witch_book, 0, xoff, yoff, xsc, ysc, gang, col, alpha2);
             }
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_witch_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -525,7 +532,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), 0, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
             {
                 draw_sprite_ext(spr_cowgirl_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
                 draw_sprite_ext(spr_cowgirl_niprings, 0, xoff, yoff, xsc, ysc, gang, col, alpha2);
@@ -694,7 +701,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), 0, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_imp_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -821,7 +828,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
                         draw_sprite_ext(spr_bunnygirl_gloves2, 0, xoff, yoff, xsc, ysc, gang, col, alpha2);
                 }
                 
-                if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+                if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                     draw_sprite_ext(spr_bunnygirl_lewds, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
                 
                 draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -908,7 +915,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), u == 4, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_monarch_lewdbits, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -972,7 +979,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), u == 4, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_gargoyle_pubes, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -1067,7 +1074,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_facesprite(mySpecies, myMood, u, ey), 0, xoff, yoff, xsc, ysc, gang, col, al_ * alpha2);
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_kitsune_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             draw_girl_serum(mySpecies, xoff, yoff, xsc, ysc, gang, col, alpha2, cum);
@@ -1179,7 +1186,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             
             draw_sprite_ext(species_basesprite(mySpecies), 0, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
-            if (species_vag_is_exposed(cl))
+            if (always_lewd || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_cerberus_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             if (lastface)
@@ -1337,7 +1344,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             draw_sprite_ext(species_basesprite(mySpecies), 0, xoff, yoff, xsc, ysc, gang, col, alpha2);
             draw_sprite_ext(spr_balrog_crystal, 0, xoff, yoff + (sin(effrads) * 18), xsc, ysc, gang, col, alpha2);
             
-            if (species_vag_is_exposed(cl))
+            if (always_lewd || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_balrog_lewd, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             if (u == 2)
@@ -3217,7 +3224,7 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
                 }
             }
             
-            if (species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl) || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_lady_lewdbits, global.settingPubes, xoff, yoff, xsc, ysc, gang, col, alpha2);
             
             if (bra_is_exposed(cl, u, undiesAlpha))
@@ -3414,13 +3421,13 @@ function draw_girl(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, a
             else
                 xside = xoff - (sprite_get_xoffset(species_basesprite(mySpecies)) * abs(xsc));
             
-            if (species_breasts_are_exposed(mySpecies, u, cl))
+            if (always_lewd || species_breasts_are_exposed(mySpecies, u, cl))
             {
                 draw_sprite_ext(spr_affectionheart, 0, xside + (lewdcoord1[0] * xsc) + (8 * sign(xsc)), (yoff - (sprite_get_yoffset(species_basesprite(mySpecies)) * ysc)) + (lewdcoord1[1] * ysc), global.censorScale * xysc * 0.7, global.censorScale * xysc * 0.7, -12 * sign(xsc), -1, 1);
                 draw_sprite_ext(spr_affectionheart, 0, xside + (lewdcoord0[0] * xsc) + (8 * sign(xsc)), (yoff - (sprite_get_yoffset(species_basesprite(mySpecies)) * ysc)) + (lewdcoord0[1] * ysc), global.censorScale * xysc * 0.7, global.censorScale * xysc * 0.7, 12 * sign(xsc), -1, 1);
             }
             
-            if (species_vag_is_exposed(cl))
+            if (always_lewd || species_vag_is_exposed(cl))
                 draw_sprite_ext(spr_affectionheart, 0, xside + (lewdcoord2[0] * xsc) + (8 * sign(xsc)), (yoff - (sprite_get_yoffset(species_basesprite(mySpecies)) * ysc)) + (lewdcoord2[1] * ysc), global.censorScale * xysc * 0.8, global.censorScale * xysc * 0.8, 0, -1, 1);
         }
         

@@ -1110,15 +1110,31 @@ if (debugY > -1000)
                     
                     if (gir != -1 && tec != -1)
                     {
+                        var nkinks = array_create(global.totalKinks + 10, false);
+                        nkinks[18] = true;
+                        
+                        for (var m_ = 1; m_ <= global.girlKinks[gir]; m_++)
+                        {
+                            if (global.girlKink[gir][m_] > 0)
+                                nkinks[global.girlKink[gir][m_]] = true;
+                        }
+                        
                         if (tec != -69)
                         {
-                            scene_action_learnkink(gir, tec);
+                            if (!nkinks[tec])
+                                scene_action_learnkink(gir, tec);
+                            
                             debugBacklog += ("CONSOLE: teaching " + global.girlName[gir] + " the " + kink_name(tec) + " kink \n");
                         }
                         else
                         {
                             for (var itt = 1; itt <= global.totalKinks; itt++)
-                                scene_action_learnkink(gir, tec);
+                            {
+                                if (nkinks[itt])
+                                    continue;
+                                
+                                scene_action_learnkink(gir, itt);
+                            }
                             
                             debugBacklog += ("CONSOLE: teaching " + global.girlName[gir] + " EVERY kink \n");
                         }
@@ -3653,6 +3669,263 @@ if (debugY > -1000)
                 case "help":
                     debugBacklog += "CONSOLE: opening help page\n";
                     open_url_fixed("https://www.patreon.com/posts/haremon-debug-64480933");
+                    break;
+                
+                case "dnlgetitemnames":
+                    var base_name = "";
+                    var base_id = "";
+                    var str = "";
+                    var fullstr = "";
+                    
+                    for (i = 0; i <= global.totalItems; i++)
+                    {
+                        if ((i % 50) == 0 && str != "")
+                        {
+                            show_message(str);
+                            str = "";
+                        }
+                        
+                        base_id = string(i);
+                        base_name = item_name_base(i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": getitemid " + base_name + "\n");
+                        fullstr += str;
+                    }
+                    
+                    if (str != "")
+                    {
+                        show_message(str);
+                        str = "";
+                    }
+                    
+                    debugBacklog += ("CONSOLE: " + keyword + " copy names to clipboard\n");
+                    
+                    if (fullstr != "")
+                        clipboard_set_text(fullstr);
+                    
+                    break;
+                
+                case "dnlgetquestnames":
+                    var base_name = "";
+                    var base_id = "";
+                    var str = "";
+                    var fullstr = "";
+                    
+                    for (i = 0; i <= global.quests; i++)
+                    {
+                        if ((i % 50) == 0 && i != 0 && str != "")
+                        {
+                            show_message(str);
+                            str = "";
+                        }
+                        
+                        base_id = string(i);
+                        base_name = quest_name(i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": getquestid " + base_name + "\n");
+                        fullstr += str;
+                    }
+                    
+                    if (str != "")
+                    {
+                        show_message(str);
+                        str = "";
+                    }
+                    
+                    debugBacklog += ("CONSOLE: " + keyword + " copy names to clipboard\n");
+                    
+                    if (fullstr != "")
+                        clipboard_set_text(fullstr);
+                    
+                    break;
+                
+                case "dnlgettechniquenames":
+                case "dnlgettechnames":
+                    var base_name = "";
+                    var base_id = "";
+                    var str = "";
+                    var fullstr = "";
+                    var com = (keyword == "dnlgettechnames") ? "gettechid" : "gettechniqueid";
+                    
+                    for (i = 0; i <= global.totalTechniques; i++)
+                    {
+                        if ((i % 50) == 0 && i != 0 && str != "")
+                        {
+                            show_message(str);
+                            str = "";
+                        }
+                        
+                        base_id = string(i);
+                        base_name = technique_name(i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": " + com + " " + base_name + "\n");
+                        fullstr += str;
+                    }
+                    
+                    if (str != "")
+                    {
+                        show_message(str);
+                        str = "";
+                    }
+                    
+                    debugBacklog += ("CONSOLE: " + keyword + " copy names to clipboard\n");
+                    
+                    if (fullstr != "")
+                        clipboard_set_text(fullstr);
+                    
+                    break;
+                
+                case "dnlgetscenenames":
+                    var base_str = "";
+                    var base_name = "";
+                    var base_id = "";
+                    var str = "";
+                    var fullstr = "";
+                    
+                    for (i = 0; i <= 710; i++)
+                    {
+                        if ((i % 50) == 0 && i != 0 && str != "")
+                        {
+                            show_message(str);
+                            str = "";
+                        }
+                        
+                        base_id = string(i);
+                        base_name = scene_name(i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": getsceneid " + base_name + "\n");
+                        fullstr += str;
+                        if (i == 76) {
+                            continue;
+                        }
+                        base_name = scene_name2(i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": getsceneid " + base_name + "\n");
+                        fullstr += str;
+                    }
+                    
+                    if (str != "")
+                    {
+                        show_message(str);
+                        str = "";
+                    }
+                    
+                    debugBacklog += ("CONSOLE: " + keyword + " copy names to clipboard\n");
+                    
+                    if (fullstr != "")
+                        clipboard_set_text(fullstr);
+                    
+                    break;
+                
+                case "dnlgetspeciesnames":
+                    var base_str = "";
+                    var base_name = "";
+                    var base_id = "";
+                    var str = "";
+                    var fullstr = "";
+                    
+                    for (i = 0; i <= global.totalSpecies; i++)
+                    {
+                        if ((i % 50) == 0 && i != 0 && str != "")
+                        {
+                            show_message(str);
+                            str = "";
+                        }
+                        
+                        base_id = string(i);
+                        base_name = species_name(i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": getspeciesid " + base_name + "\n");
+                        fullstr += str;
+                    }
+                    
+                    for (i = 0; i <= global.totalMonsters; i++)
+                    {
+                        if (((i + 100) % 50) == 0 && i != 0 && str != "")
+                        {
+                            show_message(str);
+                            str = "";
+                        }
+                        
+                        base_id = string(100 + i);
+                        base_name = species_name(100 + i);
+                        base_name = string_lower(base_name);
+                        base_name = string_replace_all(base_name, " ", "_");
+                        str += ("id: " + base_id + ": getspeciesid " + base_name + "\n");
+                        fullstr += str;
+                    }
+                    
+                    if (str != "")
+                    {
+                        show_message(str);
+                        str = "";
+                    }
+                    
+                    debugBacklog += ("CONSOLE: " + keyword + " copy names to clipboard\n");
+                    
+                    if (fullstr != "")
+                        clipboard_set_text(fullstr);
+                    
+                    break;
+                
+                case "dnlalwaysnakedmode":
+                    if (global.FLAGS < 389)
+                    {
+                        debugBacklog += "ERROR: invalid command\n";
+                        break;
+                    }
+                    
+                    var tf = 387;
+                    var toggle = global.FLAG[tf] == 1;
+                    toggle = !toggle;
+                    
+                    if (toggle)
+                        global.FLAG[tf] = 1;
+                    else
+                        global.FLAG[tf] = 0;
+                    
+                    if (toggle)
+                        debugBacklog += "CONSOLE: activating always naked mode\n";
+                    else
+                        debugBacklog += "CONSOLE: deactivating always naked mode\n";
+                    
+                    break;
+                
+                case "dnlalwayspaintlewdspritemode":
+                    if (global.FLAGS < 389)
+                    {
+                        debugBacklog += "ERROR: invalid command\n";
+                        break;
+                    }
+                    
+                    var tf = 388;
+                    var toggle = global.FLAG[tf] == 1;
+                    toggle = !toggle;
+                    
+                    if (toggle)
+                        global.FLAG[tf] = 1;
+                    else
+                        global.FLAG[tf] = 0;
+                    
+                    if (toggle)
+                        debugBacklog += "CONSOLE: activating always paint lewd sprite mode\n";
+                    else
+                        debugBacklog += "CONSOLE: deactivating always paint lewd sprite mode\n";
+                    
+                    break;
+                
+                case "dnlhelp":
+                    debugBacklog += "CONSOLE: real opening help pages\n";
+                    open_url_fixed("https://www.patreon.com/posts/haremon-debug-64480933");
+                    open_url_fixed("https://attachments.f95zone.to/2020/05/679777_haremon_debug_commands.txt");
+                    open_url_fixed("https://attachments.f95zone.to/2025/11/5491676_haremon_0.42.2_command_list_all.txt");
+                    open_url_fixed("https://attachments.f95zone.to/2025/11/5505784__haremon_0.42.2_command_list_and_0.42.5_all.txt");
                     break;
                 
                 default:
